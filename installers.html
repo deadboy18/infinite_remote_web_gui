@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% block title %}RustDesk Neo WebUI{% endblock %}
+{% block legend_name %}Installer Files{% endblock %}
+{% block content %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+  body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.5s, color 0.5s;
+  }
+
+  .container {
+    padding: 20px;
+    background: linear-gradient(145deg, #000000, #1a1a1a);
+    border-radius: 10px;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .layui-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(77, 166, 255, 0.2);
+    transition: transform 0.3s;
+  }
+
+  .layui-card:hover {
+    transform: scale(1.05);
+  }
+
+  .layui-card-header {
+    background-color: #222222;
+    color: #4da6ff;
+    border-bottom: 1px solid #333333;
+    border-radius: 10px 10px 0 0;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 0 10px #4da6ff;
+  }
+
+  .layui-card-body {
+    border-radius: 0 0 10px 10px;
+    padding: 20px;
+  }
+
+  .layui-table {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.5s;
+  }
+
+  .layui-table:hover {
+    box-shadow: 0 0 20px rgba(77, 166, 255, 0.5);
+  }
+
+  .layui-table th, .layui-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #333333;
+  }
+
+  .layui-table th {
+    background-color: #222222;
+    color: #4da6ff;
+    font-weight: bold;
+  }
+
+  .layui-table a {
+    color: #4da6ff;
+    text-decoration: none;
+  }
+
+  .layui-table a:hover {
+    text-decoration: underline;
+  }
+
+  .layui-col-md15 {
+    margin-bottom: 20px;
+  }
+
+  /* Custom Scrollbars */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #4da6ff;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #007acc;
+  }
+
+  /* Background Animation */
+  @keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  body {
+    background: linear-gradient(270deg, #000000, #1a1a1a, #000000);
+    background-size: 600% 600%;
+    animation: gradientBackground 10s ease infinite;
+  }
+
+  /* Fade In Animation */
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+</style>
+
+<script>
+  function copyToClipboard(element) {
+    const text = element.getAttribute("data-content");
+    navigator.clipboard.writeText(text).then(function() {
+      element.innerText = "Copied!";
+      setTimeout(() => {
+        element.innerText = "Copy Link";
+      }, 2000);
+    });
+  }
+</script>
+
+<div class="container">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md15">
+      <div class="layui-card">
+        <div class="layui-card-header">Installer Files for {{u.username}}</div>
+        <div class="layui-card-body">
+          <table class="layui-table">
+            <thead>
+              <tr>
+                <th>Windows EXE</th>
+                <th>Windows Installer</th>
+                <th>Linux Installer</th>
+                <th>Mac Installer</th>
+                <th>QR to scan With Mobile App</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> <a href="/static/configs/your-windows-exe-here.exe">Download</a><br><br><button onclick="copyToClipboard(this)" data-content="https://your-domain-here.com/static/configs/your-windows-exe-here.exe">Copy Link</button></td>
+                <td> <a href="/static/configs/install.bat">Download bat</a><br><br><button onclick="copyToClipboard(this)" data-content="https://your-domain-here.com/static/configs/install.bat">Copy Link</button><br>
+                <br><a href="/static/configs/install.ps1">Download Powershell</a><br><br><button onclick="copyToClipboard(this)" data-content="https://your-domain-here.com/static/configs/install.ps1">Copy Link</button></td>
+                <td> <a href="/static/configs/install-linux.sh">Download</a><br><br><button onclick="copyToClipboard(this)" data-content="https://your-domain-here.com/static/configs/install-linux.sh">Copy Link</button></td> </td>
+                <td> <a href="/static/configs/install-mac.sh">Download</a><br><br><button onclick="copyToClipboard(this)" data-content="https://your-domain-here.com/static/configs/install-mac.sh">Copy Link</button></td> </td>
+                <td> <img src="/static/configs/qrcode.png"> </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="layui-col-md15">
+      <div class="layui-card">
+        <div class="layui-card-header">Configs for {{u.username}}</div>
+        <div class="layui-card-body">
+          <table class="layui-table">
+            <thead>
+              <tr>
+                <th>Secure String</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> your-secure-string-here <button onclick="copyToClipboard(this)" data-content="your-secure-string-here">Copy</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="layui-col-md15">
+      <div class="layui-card">
+        <div class="layui-card-header">API URL and Key</div>
+        <div class="layui-card-body">
+          <table class="layui-table">
+            <thead>
+              <tr>
+                <th>API URL</th>
+                <th>Key</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+               <td> https://your-domain-here.com <button onclick="copyToClipboard(this)" data-content="https://your-domain-here.com">Copy</button></td>
+                <td> your-api-key-here <button onclick="copyToClipboard(this)" data-content="your-api-key-here">Copy</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
